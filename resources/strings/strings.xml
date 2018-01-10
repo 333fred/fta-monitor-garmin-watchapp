@@ -1,0 +1,31 @@
+<strings>
+    <string id="AppName">fta-monitor-garmin-watchapp</string>
+    
+    <string id="red">Red</string>
+    <string id="blue">Blue</string>
+    
+    <!-- Match Statuses -->
+    <string id="not_ready">Not Ready</string>
+    <string id="timeout">Timeout</string>
+    <string id="ready_prestart">Ready to Prestart</string>
+    <string id="prestart_initiated">Prestart Initiated</string>
+    <string id="prestart_complete">Prestart Completed</string>
+    <string id="match_ready">Match Ready</string>
+    <string id="auto_mode">Auto Running</string>
+    <string id="transition_mode">Match Transition</string>
+    <string id="teleop_mode">Teleop Running</string>
+    <string id="over">Match Over</string>
+    <string id="aborted">Match Aborted</string>
+    
+    <!-- Robot Statuses -->
+    <string id="ethernet">ETH</string>
+    <string id="driverstation">DS</string>
+    <string id="radio">RD</string>
+    <string id="rio">RIO</string>
+    <string id="code">CD</string>
+    <string id="estop">EST</string>
+    <string id="bandwidth">BWU</string>
+    <string id="bypassed">BYP</string>
+    <string id="battery">BAT</string>
+    <string id="good">G</string>
+</strings>

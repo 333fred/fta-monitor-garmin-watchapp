@@ -1,0 +1,17 @@
+<drawables>
+	<drawable-list id="TeamStatusBackground" foreground="Gfx.COLOR_WHITE">
+		<shape type="rectangle" x="0" y="0" width="148" height="15" color="Gfx.COLOR_BLACK" />
+		<!-- Blue Side -->
+		<shape type="rectangle" x="0" y="15" width="74" height="20" color="0x0055FF" border_width="1" border_color="Gfx.COLOR_BLACK" />
+		<shape type="rectangle" x="0" y="35" width="74" height="56" color="0x0055FF" border_width="1" border_color="Gfx.COLOR_BLACK" />
+		<shape type="rectangle" x="0" y="91" width="74" height="56" color="0x0055FF" border_width="1" border_color="Gfx.COLOR_BLACK" />
+		<shape type="rectangle" x="0" y="147" width="74" height="fill" color="0x0055FF" border_width="1" border_color="Gfx.COLOR_BLACK" />
+
+		<!-- Red Side -->
+		<shape type="rectangle" x="74" y="15" width="74" height="20" color="Gfx.COLOR_RED" border_width="1" border_color="Gfx.COLOR_BLACK" />
+		<shape type="rectangle" x="74" y="35" width="74" height="56" color="Gfx.COLOR_RED" border_width="1" border_color="Gfx.COLOR_BLACK" />
+		<shape type="rectangle" x="74" y="91" width="74" height="56" color="Gfx.COLOR_RED" border_width="1" border_color="Gfx.COLOR_BLACK" />
+		<shape type="rectangle" x="74" y="147" width="74" height="fill" color="Gfx.COLOR_RED" border_width="1" border_color="Gfx.COLOR_BLACK" />
+	</drawable-list>
+	<bitmap id="LauncherIcon" filename="launcher_icon.png" />
+</drawables>
