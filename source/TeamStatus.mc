@@ -8,6 +8,14 @@ class TeamStatusManager {
     public var Red2Status;
     public var Red3Status;
 
+    public var Blue1Number;
+    public var Blue2Number;
+    public var Blue3Number;
+
+    public var Red1Number;
+    public var Red2Number;
+    public var Red3Number;
+
     function initialize() {
         Blue1Status = TeamStatus.ETH;
         Blue2Status = TeamStatus.ETH;
@@ -15,6 +23,13 @@ class TeamStatusManager {
         Red1Status = TeamStatus.ETH;
         Red2Status = TeamStatus.ETH;
         Red3Status = TeamStatus.ETH;
+
+        Blue1Number = 1;
+        Blue2Number = 2;
+        Blue3Number = 3;
+        Red1Number = 4;
+        Red2Number = 5;
+        Red3Number = 6;
     }
 }
 

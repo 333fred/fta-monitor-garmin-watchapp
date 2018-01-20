@@ -33,6 +33,24 @@ class MessageReceiver {
                 case BLUE3_STATUS:
                     _teamStatus.Blue3Status = value;
                     break;
+                case RED1_NUMBER:
+                    _teamStatus.Red1Number = value;
+                    break;
+                case RED2_NUMBER:
+                    _teamStatus.Red2Number = value;
+                    break;
+                case RED3_NUMBER:
+                    _teamStatus.Red3Number = value;
+                    break;
+                case BLUE1_NUMBER:
+                    _teamStatus.Blue1Number = value;
+                    break;
+                case BLUE2_NUMBER:
+                    _teamStatus.Blue2Number = value;
+                    break;
+                case BLUE3_NUMBER:
+                    _teamStatus.Blue3Number = value;
+                    break;
             }
         }
 

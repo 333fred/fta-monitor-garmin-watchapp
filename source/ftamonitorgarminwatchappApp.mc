@@ -18,8 +18,7 @@ class ftamonitorgarminwatchappApp extends App.AppBase {
     // onStart() is called on application start up
     function onStart(state) {
         _timer = new Timer.Timer();
-        _testingTimer = new Timer.Timer();
-        Communcations.registerForPhoneAppMessages(_messageReceiver.method(:receive));
+        Communications.registerForPhoneAppMessages(_messageReceiver.method(:receive));
     }
 
     // onStop() is called when your application is exiting
@@ -34,7 +33,7 @@ class ftamonitorgarminwatchappApp extends App.AppBase {
     function getInitialView() {
 
         var view = new ftamonitorgarminwatchappView(_teamStatus);
-        var viewArray = [ view, new ftamonitorgarminwatchappDelegate() ];
+        var viewArray = [ view, new ftamonitorgarminwatchappDelegate(view) ];
         _timer.start(new Lang.Method(Ui, :requestUpdate), 60000, true);
         return viewArray;
     }

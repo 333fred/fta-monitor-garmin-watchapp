@@ -16,10 +16,13 @@ class ftamonitorgarminwatchappView extends Ui.View {
 
     // Status of things
     private var _teamStatus;
+    // Whether to display numbers or status
+    private var _displayStatus;
 
     function initialize(teamStatus) {
         View.initialize();
         _teamStatus = teamStatus;
+        _displayStatus = true;
     }
 
     // Load your resources here
@@ -64,6 +67,11 @@ class ftamonitorgarminwatchappView extends Ui.View {
     function onHide() {
     }
 
+    public function switchDisplay() {
+        _displayStatus = !_displayStatus;
+        Ui.requestUpdate();
+    }
+
     private function updateTime() {
         var currentTime = System.getClockTime();
         var timeString = currentTime.hour.format("%20d") + ":" + currentTime.min.format("%02d");
@@ -73,11 +81,20 @@ class ftamonitorgarminwatchappView extends Ui.View {
     }
 
     private function updateTeams() {
-        _blue1.setText(TeamStatus.getStatusString(_teamStatus.Blue1));
-        _blue2.setText(TeamStatus.getStatusString(_teamStatus.Blue2));
-        _blue3.setText(TeamStatus.getStatusString(_teamStatus.Blue3));
-        _red1.setText(TeamStatus.getStatusString(_teamStatus.Red1));
-        _red2.setText(TeamStatus.getStatusString(_teamStatus.Red2));
-        _red3.setText(TeamStatus.getStatusString(_teamStatus.Red3));
+        if (_displayStatus) {
+            _blue1.setText(TeamStatus.getStatusString(_teamStatus.Blue1Status));
+            _blue2.setText(TeamStatus.getStatusString(_teamStatus.Blue2Status));
+            _blue3.setText(TeamStatus.getStatusString(_teamStatus.Blue3Status));
+            _red1.setText(TeamStatus.getStatusString(_teamStatus.Red1Status));
+            _red2.setText(TeamStatus.getStatusString(_teamStatus.Red2Status));
+            _red3.setText(TeamStatus.getStatusString(_teamStatus.Red3Status));
+        } else {
+            _blue1.setText(_teamStatus.Blue1Number.format("%d"));
+            _blue2.setText(_teamStatus.Blue2Number.format("%d"));
+            _blue3.setText(_teamStatus.Blue3Number.format("%d"));
+            _red1.setText(_teamStatus.Red1Number.format("%d"));
+            _red2.setText(_teamStatus.Red2Number.format("%d"));
+            _red3.setText(_teamStatus.Red3Number.format("%d"));
+        }
     }
 }
