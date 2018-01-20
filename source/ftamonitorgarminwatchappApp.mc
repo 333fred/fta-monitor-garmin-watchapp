@@ -6,7 +6,6 @@ using Toybox.Timer;
 class ftamonitorgarminwatchappApp extends App.AppBase {
 
     private var _timer;
-    private var _testingTimer;
     private var _teamStatus;
     private var _messageReceiver;
 
@@ -28,8 +27,6 @@ class ftamonitorgarminwatchappApp extends App.AppBase {
         if (_timer != null) {
             _timer.stop();
             _timer = null;
-            _testingTimer.stop();
-            _testingTimer = null;
         }
     }
 
@@ -39,7 +36,6 @@ class ftamonitorgarminwatchappApp extends App.AppBase {
         var view = new ftamonitorgarminwatchappView(_teamStatus);
         var viewArray = [ view, new ftamonitorgarminwatchappDelegate() ];
         _timer.start(new Lang.Method(Ui, :requestUpdate), 60000, true);
-        _testingTimer.start(method(:tester), 1000, true);
         return viewArray;
     }
 
