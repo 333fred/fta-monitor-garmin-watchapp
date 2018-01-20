@@ -4,28 +4,45 @@ class StatusViewDelegate extends Ui.InputDelegate {
 
     private var _ui;
 
+    private var _currentState;
+
     function initialize(ui) {
         _ui = ui;
         InputDelegate.initialize();
     }
 
-    function onKey(keyEvent) {
-        if (keyEvent.getKey() == Ui.KEY_ENTER) {
-            _ui.switchDisplay();
-            return true;
+    function onSwipe(swipeEvent) {
+        var direction = swipeEvent.getDirection();
+
+        switch (direction) {
+            case Ui.SWIPE_UP:
+            case Ui.SWIPE_DOWN:
+                handleNumber();
+                return true;
+            case Ui.SWIPE_LEFT:
+            case Ui.SWIPE_RIGHT:
+                handleBattery();
+                return true;
         }
 
         return false;
     }
 
-    function onSwipe(swipeEvent) {
-        var direction = swipeEvent.getDirection();
-        if (direction == Ui.SWIPE_UP) {
-            System.println("Swiped up");
-        } else if (direction == Ui.SWIPE_DOWN) {
-            System.println("Swiped down");
+    function handleNumber() {
+        if (_currentState == ViewStatus.TEAM_NUMBER) {
+            _currentState = ViewStatus.TEAM_STATUS;
+        } else {
+            _currentState = ViewStatus.TEAM_NUMBER;
         }
+        _ui.setViewStatus(_currentState);
+    }
 
-        return false;
+    function handleBattery() {
+        if (_currentState == ViewStatus.BATTERY) {
+            _currentState = ViewStatus.TEAM_STATUS;
+        } else {
+            _currentState = ViewStatus.BATTERY;
+        }
+        _ui.setViewStatus(_currentState);
     }
 }

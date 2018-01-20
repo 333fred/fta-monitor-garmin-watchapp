@@ -3,7 +3,6 @@ class TeamStatusManager {
     public var Blue1Status;
     public var Blue2Status;
     public var Blue3Status;
-
     public var Red1Status;
     public var Red2Status;
     public var Red3Status;
@@ -11,10 +10,19 @@ class TeamStatusManager {
     public var Blue1Number;
     public var Blue2Number;
     public var Blue3Number;
-
     public var Red1Number;
     public var Red2Number;
     public var Red3Number;
+
+    public var Blue1Battery;
+    public var Blue2Battery;
+    public var Blue3Battery;
+    public var Red1Battery;
+    public var Red2Battery;
+    public var Red3Battery;
+
+    // Of type MatchState
+    public var MatchStatus;
 
     function initialize() {
         Blue1Status = TeamStatus.ETH;
@@ -30,6 +38,58 @@ class TeamStatusManager {
         Red1Number = 4;
         Red2Number = 5;
         Red3Number = 6;
+
+        Blue1Battery = 11.11;
+        Blue2Battery = 22.22;
+        Blue3Battery = 33.33;
+        Red1Battery = 44.44;
+        Red2Battery = 55.55;
+        Red3Battery = 66.66;
+
+        MatchStatus = MatchState.NOT_READY;
+    }
+}
+
+module MatchState {
+    enum {
+        NOT_READY=0,
+        TIMEOUT=1,
+        READY_PRESTART=2,
+        PRESTART_INITATED=3,
+        PRESTART_COMPLETED=4,
+        MATCH_READY=5,
+        AUTO=6,
+        TRANSITION=7,
+        TELEOP=8,
+        OVER=9,
+        ABORTED=10
+    }
+
+    function getStatusString(status) {
+        switch (status) {
+            case NOT_READY:
+                return Rez.Strings.not_ready;
+            case TIMEOUT:
+                return Rez.Strings.timeout;
+            case READY_PRESTART:
+                return Rez.Strings.ready_prestart;
+            case PRESTART_INITATED:
+                return Rez.Strings.prestart_initiated;
+            case PRESTART_COMPLETED:
+                return Rez.Strings.prestart_completed;
+            case MATCH_READY:
+                return Rez.Strings.match_ready;
+            case AUTO:
+                return Rez.Strings.auto_mode;
+            case TRANSITION:
+                return Rez.Strings.transition_mode;
+            case TELEOP:
+                return Rez.Strings.teleop_mode;
+            case OVER:
+                return Rez.Strings.over;
+            case ABORTED:
+                return Rez.Strings.aborted;
+        }
     }
 }
 
@@ -70,5 +130,9 @@ module TeamStatus {
             case BAT:
                 return Rez.Strings.battery;
         }
+    }
+
+    function formatBattery(battery) {
+        return battery.format("%4.2f");
     }
 }

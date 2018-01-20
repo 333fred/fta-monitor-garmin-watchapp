@@ -31,7 +31,6 @@ class FtaMonitorApp extends App.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() {
-
         var view = new StatusView(_teamStatus);
         var viewArray = [ view, new StatusViewDelegate(view) ];
         _timer.start(new Lang.Method(Ui, :requestUpdate), 60000, true);
