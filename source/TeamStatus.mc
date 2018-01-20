@@ -1,20 +1,20 @@
 class TeamStatusManager {
     // All variables are of type TeamStatus
-    public var Blue1;
-    public var Blue2;
-    public var Blue3;
+    public var Blue1Status;
+    public var Blue2Status;
+    public var Blue3Status;
 
-    public var Red1;
-    public var Red2;
-    public var Red3;
+    public var Red1Status;
+    public var Red2Status;
+    public var Red3Status;
 
     function initialize() {
-        Blue1 = TeamStatus.ETH;
-        Blue2 = TeamStatus.ETH;
-        Blue3 = TeamStatus.ETH;
-        Red1 = TeamStatus.ETH;
-        Red2 = TeamStatus.ETH;
-        Red3 = TeamStatus.ETH;
+        Blue1Status = TeamStatus.ETH;
+        Blue2Status = TeamStatus.ETH;
+        Blue3Status = TeamStatus.ETH;
+        Red1Status = TeamStatus.ETH;
+        Red2Status = TeamStatus.ETH;
+        Red3Status = TeamStatus.ETH;
     }
 }
 
