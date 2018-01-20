@@ -36,22 +36,4 @@ class FtaMonitorApp extends App.AppBase {
         _timer.start(new Lang.Method(Ui, :requestUpdate), 60000, true);
         return viewArray;
     }
-
-    function tester() {
-        _teamStatus.Blue1 = incrementStatus(_teamStatus.Blue1Status);
-        _teamStatus.Blue2 = incrementStatus(_teamStatus.Blue2Status);
-        _teamStatus.Blue3 = incrementStatus(_teamStatus.Blue3Status);
-        _teamStatus.Red1 = incrementStatus(_teamStatus.Red1Status);
-        _teamStatus.Red2 = incrementStatus(_teamStatus.Red2Status);
-        _teamStatus.Red3 = incrementStatus(_teamStatus.Red3Status);
-        Ui.requestUpdate();
-    }
-
-    private function incrementStatus(status) {
-        if (status == TeamStatus.BAT) {
-            return TeamStatus.ETH;
-        } else {
-            return status + 1;
-        }
-    }
 }
