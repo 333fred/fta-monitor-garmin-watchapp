@@ -3,7 +3,7 @@ using Toybox.WatchUi as Ui;
 using Toybox.Communications;
 using Toybox.Timer;
 
-class ftamonitorgarminwatchappApp extends App.AppBase {
+class FtaMonitorApp extends App.AppBase {
 
     private var _timer;
     private var _teamStatus;
@@ -32,8 +32,8 @@ class ftamonitorgarminwatchappApp extends App.AppBase {
     // Return the initial view of your application here
     function getInitialView() {
 
-        var view = new ftamonitorgarminwatchappView(_teamStatus);
-        var viewArray = [ view, new ftamonitorgarminwatchappDelegate(view) ];
+        var view = new StatusView(_teamStatus);
+        var viewArray = [ view, new StatusViewDelegate(view) ];
         _timer.start(new Lang.Method(Ui, :requestUpdate), 60000, true);
         return viewArray;
     }

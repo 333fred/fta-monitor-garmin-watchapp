@@ -1,7 +1,7 @@
 using Toybox.WatchUi as Ui;
 using Toybox.System;
 
-class ftamonitorgarminwatchappView extends Ui.View {
+class StatusView extends Ui.View {
 
     // Views
     private var _timeView;
