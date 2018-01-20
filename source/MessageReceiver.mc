@@ -1,5 +1,4 @@
-using Communcations;
-using WatchUi;
+using Toybox.WatchUi as Ui;
 
 class MessageReceiver {
 
@@ -37,13 +36,13 @@ class MessageReceiver {
             }
         }
 
-        WatchUi.requestUpdate();
+        Ui.requestUpdate();
     }
 }
 
 // Different message keys
 enum {
-    RED1_STATUS = 1
+    RED1_STATUS = 1,
     RED2_STATUS = 2,
     RED3_STATUS = 3,
     BLUE1_STATUS = 4,

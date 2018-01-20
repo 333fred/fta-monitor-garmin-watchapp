@@ -1,6 +1,6 @@
 using Toybox.Application as App;
 using Toybox.WatchUi as Ui;
-using Toybox.Communcations;
+using Toybox.Communications;
 using Toybox.Timer;
 
 class ftamonitorgarminwatchappApp extends App.AppBase {
