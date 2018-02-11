@@ -1,4 +1,5 @@
 using Toybox.WatchUi as Ui;
+using Toybox.Application as App;
 
 class MessageReceiver {
 
@@ -50,6 +51,30 @@ class MessageReceiver {
                     break;
                 case BLUE3_NUMBER:
                     _teamStatus.Blue3Number = value;
+                    break;
+                case RED1_BATT:
+                    _teamStatus.Red1Battery = value;
+                    break;
+                case RED2_BATT:
+                    _teamStatus.Red2Battery = value;
+                    break;
+                case RED3_BATT:
+                    _teamStatus.Red3Battery = value;
+                    break;
+                case BLUE1_BATT:
+                    _teamStatus.Blue1Battery = value;
+                    break;
+                case BLUE2_BATT:
+                    _teamStatus.Blue2Battery = value;
+                    break;
+                case BLUE3_BATT:
+                    _teamStatus.Blue3Battery = value;
+                    break;
+                case VIBE:
+                    App.getApp().view.vibrate();
+                    break;
+                case MATCH_STATE:
+                    _teamStatus.MatchStatus = value;
                     break;
             }
         }

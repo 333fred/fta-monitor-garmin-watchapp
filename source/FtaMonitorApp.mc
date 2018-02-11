@@ -8,6 +8,7 @@ class FtaMonitorApp extends App.AppBase {
     private var _timer;
     private var _teamStatus;
     private var _messageReceiver;
+    var view;
 
     function initialize() {
         AppBase.initialize();
@@ -31,7 +32,7 @@ class FtaMonitorApp extends App.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() {
-        var view = new StatusView(_teamStatus);
+        view = new StatusView(_teamStatus);
         var viewArray = [ view, new StatusViewDelegate(view) ];
         _timer.start(new Lang.Method(Ui, :requestUpdate), 60000, true);
         return viewArray;

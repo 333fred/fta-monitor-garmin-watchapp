@@ -9,7 +9,7 @@
     <string id="timeout">Timeout</string>
     <string id="ready_prestart">Ready to Prestart</string>
     <string id="prestart_initiated">Prestart Initiated</string>
-    <string id="prestart_complete">Prestart Completed</string>
+    <string id="prestart_completed">Prestart Completed</string>
     <string id="match_ready">Match Ready</string>
     <string id="auto_mode">Auto Running</string>
     <string id="transition_mode">Match Transition</string>

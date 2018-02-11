@@ -1,5 +1,6 @@
 using Toybox.WatchUi as Ui;
 using Toybox.System;
+using Toybox.Attention as Attention;
 
 module ViewStatus {
     enum {
@@ -75,6 +76,18 @@ class StatusView extends Ui.View {
     // state of this View here. This includes freeing resources from
     // memory.
     function onHide() {
+    }
+
+    function vibrate() {
+        if (Attention has :vibrate) {
+            var vibrateData = [
+                    new Attention.VibeProfile(50, 500),
+                ];
+
+            Attention.vibrate(vibrateData);
+        } else {
+            System.println("Vibe not supported");
+        }
     }
 
     public function setViewStatus(status) {
