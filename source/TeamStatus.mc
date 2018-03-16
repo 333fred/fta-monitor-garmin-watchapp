@@ -58,11 +58,12 @@ module MatchState {
         PRESTART_INITATED=3,
         PRESTART_COMPLETED=4,
         MATCH_READY=5,
-        AUTO=6,
-        TRANSITION=7,
-        TELEOP=8,
-        OVER=9,
-        ABORTED=10
+        SENDING_DATA=6,
+        AUTO=7,
+        TRANSITION=8,
+        TELEOP=9,
+        OVER=10,
+        ABORTED=11
     }
 
     function getStatusString(status) {
@@ -79,6 +80,8 @@ module MatchState {
                 return Rez.Strings.prestart_completed;
             case MATCH_READY:
                 return Rez.Strings.match_ready;
+            case SENDING_DATA:
+                return Rez.Strings.sending_data;
             case AUTO:
                 return Rez.Strings.auto_mode;
             case TRANSITION:
