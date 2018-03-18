@@ -71,7 +71,7 @@ class MessageReceiver {
                     _teamStatus.Blue3Battery = value;
                     break;
                 case VIBE:
-                    App.getApp().view.vibrate();
+                    App.getApp().vibrate();
                     break;
                 case MATCH_STATE:
                     _teamStatus.MatchStatus = value;

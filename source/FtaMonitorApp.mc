@@ -8,7 +8,7 @@ class FtaMonitorApp extends App.AppBase {
     private var _timer;
     private var _teamStatus;
     private var _messageReceiver;
-    var view;
+    private var _view;
 
     function initialize() {
         AppBase.initialize();
@@ -30,10 +30,18 @@ class FtaMonitorApp extends App.AppBase {
         }
     }
 
+    function vibrate() {
+        // Possible to be null if the app has just started up and there are messages queued, then
+        // the view won't yet be created so we won't be able to vibrate.
+        if (_view != null) {
+            _view.vibrate();
+        }
+    }
+
     // Return the initial view of your application here
     function getInitialView() {
-        view = new StatusView(_teamStatus);
-        var viewArray = [ view, new StatusViewDelegate(view) ];
+        _view = new StatusView(_teamStatus);
+        var viewArray = [ _view, new StatusViewDelegate(_view) ];
         _timer.start(new Lang.Method(Ui, :requestUpdate), 60000, true);
         return viewArray;
     }
