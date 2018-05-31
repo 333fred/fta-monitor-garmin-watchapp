@@ -33,6 +33,14 @@ class StatusView extends Ui.View {
     private var _blueCellStart;
     private var _redCellStart;
 
+    // Highlight status
+    private var _blue1Highlight = true;
+    private var _blue2Highlight = true;
+    private var _blue3Highlight = true;
+    private var _red1Highlight = true;
+    private var _red2Highlight = true;
+    private var _red3Highlight = true;
+
     // Cell positions
     private var _thirdRowBackgroundYStart;
     private var _thirdRowHeight;
@@ -167,8 +175,6 @@ class StatusView extends Ui.View {
 
         _blue3Text = new Ui.Text({
             :color=>Graphics.COLOR_WHITE,
-            :text=>"Blue3",
-            //:color=>Graphics.COLOR_BLACK,
             :justification=>totallyCentered,
             :locX=>leftCentered,
             :locY=>cell3Text
@@ -242,11 +248,17 @@ class StatusView extends Ui.View {
 
     private function updateTeams() {
         if (_displayStatus == ViewStatus.TEAM_STATUS) {
+            _blue1Highlight = TeamStatus.isBadStatus(_teamStatus.Blue1Status);
             _blue1Text.setText(TeamStatus.getStatusString(_teamStatus.Blue1Status));
+            _blue2Highlight = TeamStatus.isBadStatus(_teamStatus.Blue2Status);
             _blue2Text.setText(TeamStatus.getStatusString(_teamStatus.Blue2Status));
+            _blue3Highlight = TeamStatus.isBadStatus(_teamStatus.Blue3Status);
             _blue3Text.setText(TeamStatus.getStatusString(_teamStatus.Blue3Status));
+            _red1Highlight = TeamStatus.isBadStatus(_teamStatus.Red1Status);
             _red1Text.setText(TeamStatus.getStatusString(_teamStatus.Red1Status));
+            _red2Highlight = TeamStatus.isBadStatus(_teamStatus.Red2Status);
             _red2Text.setText(TeamStatus.getStatusString(_teamStatus.Red2Status));
+            _red3Highlight = TeamStatus.isBadStatus(_teamStatus.Red3Status);
             _red3Text.setText(TeamStatus.getStatusString(_teamStatus.Red3Status));
         } else if (_displayStatus == ViewStatus.TEAM_NUMBER) {
             _blue1Text.setText(_teamStatus.Blue1Number.format("%d"));
@@ -268,25 +280,52 @@ class StatusView extends Ui.View {
     private function drawUi(dc) {
         dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_BLACK);
         dc.clear();
+
+        // Redraw the headers
+        _matchStatus.draw(dc);
+        _timeView.draw(dc);
+        _batteryView.draw(dc);
+
+        // Blue side
+        dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_BLACK);
         dc.fillRoundedRectangle(_blueCellStart, _thirdRowBackgroundYStart, _cellWidth, _thirdRowHeight, _radius);
+        setColors(dc, true, _blue1Highlight, _blue1Text);
         dc.fillRoundedRectangle(_blueCellStart, _cell1YStart, _cellWidth, _cellHeight, _radius);
+        setColors(dc, true, _blue2Highlight, _blue2Text);
         dc.fillRoundedRectangle(_blueCellStart, _cell2YStart, _cellWidth, _cellHeight, _radius);
+        setColors(dc, true, _blue3Highlight, _blue3Text);
         dc.fillRoundedRectangle(_blueCellStart, _cell3YStart, _cellWidth, _cellHeight, _radius);
+
+        // Red side
         dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_BLACK);
         dc.fillRoundedRectangle(_redCellStart, _thirdRowBackgroundYStart, _cellWidth, _thirdRowHeight, _radius);
+        setColors(dc, false, _red1Highlight, _red1Text);
         dc.fillRoundedRectangle(_redCellStart, _cell1YStart, _cellWidth, _cellHeight, _radius);
+        setColors(dc, false, _red2Highlight, _red2Text);
         dc.fillRoundedRectangle(_redCellStart, _cell2YStart, _cellWidth, _cellHeight, _radius);
+        setColors(dc, false, _red3Highlight, _red3Text);
         dc.fillRoundedRectangle(_redCellStart, _cell3YStart, _cellWidth, _cellHeight, _radius);
-        _matchStatus.draw(dc);
-        _blueHeader.draw(dc);
-        _redHeader.draw(dc);
+
+        updateTeams();
         _blue1Text.draw(dc);
         _blue2Text.draw(dc);
         _blue3Text.draw(dc);
         _red1Text.draw(dc);
         _red2Text.draw(dc);
         _red3Text.draw(dc);
-        _timeView.draw(dc);
-        _batteryView.draw(dc);
+        _blueHeader.setText(Rez.Strings.blue);
+        _blueHeader.draw(dc);
+        _redHeader.setText(Rez.Strings.red);
+        _redHeader.draw(dc);
+    }
+
+    private function setColors(dc, isBlue, highlight, textBox) {
+        if (highlight) {
+            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+            textBox.setColor(isBlue ? Graphics.COLOR_BLUE : Graphics.COLOR_RED);
+        } else {
+            dc.setColor(isBlue ? Graphics.COLOR_BLUE : Graphics.COLOR_RED, Graphics.COLOR_BLACK);
+            textBox.setColor(Graphics.COLOR_WHITE);
+        }
     }
 }

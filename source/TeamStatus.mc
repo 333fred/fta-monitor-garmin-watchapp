@@ -135,6 +135,10 @@ module TeamStatus {
         }
     }
 
+    function isBadStatus(status) {
+        return status != GOOD;
+    }
+
     function formatBattery(battery) {
         return battery.format("%4.2f");
     }
