@@ -8,7 +8,8 @@ module ViewStatus {
     enum {
         TEAM_STATUS,
         TEAM_NUMBER,
-        BATTERY
+        BATTERY,
+        FIELD_STATUS
     }
 }
 
@@ -30,8 +31,9 @@ class StatusView extends Ui.View {
     private var _red1Text;
     private var _red2Text;
     private var _red3Text;
-    private var _blueCellStart;
-    private var _redCellStart;
+    private var _matchTitleText;
+    private var _matchNumberText;
+    private var _matchTimeText;
 
     // Highlight status
     private var _blue1Highlight = true;
@@ -53,6 +55,8 @@ class StatusView extends Ui.View {
     private var _cell3YEnd;
     private var _cellWidth;
     private var _radius = 3;
+    private var _blueCellStart;
+    private var _redCellStart;
 
     // Status of things
     private var _teamStatus;
@@ -184,7 +188,7 @@ class StatusView extends Ui.View {
             :color=>Graphics.COLOR_WHITE,
             :justification=>totallyCentered,
             :locX=>rightCentered,
-            :locY=>cell1Text
+            :locY=>cell3Text
         });
 
         _red2Text = new Ui.Text({
@@ -198,14 +202,43 @@ class StatusView extends Ui.View {
             :color=>Graphics.COLOR_WHITE,
             :justification=>totallyCentered,
             :locX=>rightCentered,
-            :locY=>cell3Text
+            :locY=>cell1Text
         });
+
+
+        // Calculate the position of the field info text boxes
+        var midGrid = ((_deviceHeight - _thirdRowBackgroundYStart) / 2).toNumber() + _thirdRowBackgroundYStart;
+        var largeTextHeight = dc.getFontHeight(Graphics.FONT_LARGE);
+        var largeHeightOffset = (largeTextHeight / 2).toNumber();
+
+        _matchTitleText = new Ui.Text({
+            :text=>"Match Number",
+            :font=>Graphics.FONT_MEDIUM,
+            :color=>Graphics.COLOR_WHITE,
+            :justification=>totallyCentered,
+            :locX=>halfWidth,
+            :locY=>(midGrid - largeTextHeight - margin)
+        });
+        _matchNumberText= new Ui.Text({
+            :text=>"Pratice 999",
+            :font=>Graphics.FONT_LARGE,
+            :color=>Graphics.COLOR_WHITE,
+            :justification=>totallyCentered,
+            :locX=>halfWidth,
+            :locY=>midGrid
+        });
+        _matchTimeText= new Ui.Text({
+            :text=>"+1",
+            :font=>Graphics.FONT_TINY,
+            :color=>Graphics.COLOR_WHITE,
+            :justification=>totallyCentered,
+            :locX=>halfWidth,
+            :locY=>(midGrid + largeHeightOffset + margin + tinyHeightOffset)
+        });
+
         updateTimeAndBattery();
         updateTeams();
         drawUi(dc);
-    }
-
-    function onShow() {
     }
 
     // Update the view
@@ -277,6 +310,10 @@ class StatusView extends Ui.View {
         }
     }
 
+    private function updateFieldStatus() {
+        // TODO: Implement
+    }
+
     private function drawUi(dc) {
         dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_BLACK);
         dc.clear();
@@ -286,37 +323,44 @@ class StatusView extends Ui.View {
         _timeView.draw(dc);
         _batteryView.draw(dc);
 
-        // Blue side
-        dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_BLACK);
-        dc.fillRoundedRectangle(_blueCellStart, _thirdRowBackgroundYStart, _cellWidth, _thirdRowHeight, _radius);
-        setColors(dc, true, _blue1Highlight, _blue1Text);
-        dc.fillRoundedRectangle(_blueCellStart, _cell1YStart, _cellWidth, _cellHeight, _radius);
-        setColors(dc, true, _blue2Highlight, _blue2Text);
-        dc.fillRoundedRectangle(_blueCellStart, _cell2YStart, _cellWidth, _cellHeight, _radius);
-        setColors(dc, true, _blue3Highlight, _blue3Text);
-        dc.fillRoundedRectangle(_blueCellStart, _cell3YStart, _cellWidth, _cellHeight, _radius);
+        if (_displayStatus != ViewStatus.FIELD_STATUS) {
+            // Blue side
+            dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_BLACK);
+            dc.fillRoundedRectangle(_blueCellStart, _thirdRowBackgroundYStart, _cellWidth, _thirdRowHeight, _radius);
+            setColors(dc, true, _blue1Highlight, _blue1Text);
+            dc.fillRoundedRectangle(_blueCellStart, _cell1YStart, _cellWidth, _cellHeight, _radius);
+            setColors(dc, true, _blue2Highlight, _blue2Text);
+            dc.fillRoundedRectangle(_blueCellStart, _cell2YStart, _cellWidth, _cellHeight, _radius);
+            setColors(dc, true, _blue3Highlight, _blue3Text);
+            dc.fillRoundedRectangle(_blueCellStart, _cell3YStart, _cellWidth, _cellHeight, _radius);
 
-        // Red side
-        dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_BLACK);
-        dc.fillRoundedRectangle(_redCellStart, _thirdRowBackgroundYStart, _cellWidth, _thirdRowHeight, _radius);
-        setColors(dc, false, _red1Highlight, _red1Text);
-        dc.fillRoundedRectangle(_redCellStart, _cell1YStart, _cellWidth, _cellHeight, _radius);
-        setColors(dc, false, _red2Highlight, _red2Text);
-        dc.fillRoundedRectangle(_redCellStart, _cell2YStart, _cellWidth, _cellHeight, _radius);
-        setColors(dc, false, _red3Highlight, _red3Text);
-        dc.fillRoundedRectangle(_redCellStart, _cell3YStart, _cellWidth, _cellHeight, _radius);
+            // Red side
+            dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_BLACK);
+            dc.fillRoundedRectangle(_redCellStart, _thirdRowBackgroundYStart, _cellWidth, _thirdRowHeight, _radius);
+            setColors(dc, false, _red1Highlight, _red1Text);
+            dc.fillRoundedRectangle(_redCellStart, _cell1YStart, _cellWidth, _cellHeight, _radius);
+            setColors(dc, false, _red2Highlight, _red2Text);
+            dc.fillRoundedRectangle(_redCellStart, _cell2YStart, _cellWidth, _cellHeight, _radius);
+            setColors(dc, false, _red3Highlight, _red3Text);
+            dc.fillRoundedRectangle(_redCellStart, _cell3YStart, _cellWidth, _cellHeight, _radius);
 
-        updateTeams();
-        _blue1Text.draw(dc);
-        _blue2Text.draw(dc);
-        _blue3Text.draw(dc);
-        _red1Text.draw(dc);
-        _red2Text.draw(dc);
-        _red3Text.draw(dc);
-        _blueHeader.setText(Rez.Strings.blue);
-        _blueHeader.draw(dc);
-        _redHeader.setText(Rez.Strings.red);
-        _redHeader.draw(dc);
+            updateTeams();
+            _blue1Text.draw(dc);
+            _blue2Text.draw(dc);
+            _blue3Text.draw(dc);
+            _red1Text.draw(dc);
+            _red2Text.draw(dc);
+            _red3Text.draw(dc);
+            _blueHeader.setText(Rez.Strings.blue);
+            _blueHeader.draw(dc);
+            _redHeader.setText(Rez.Strings.red);
+            _redHeader.draw(dc);
+        } else {
+            updateFieldStatus();
+            _matchTitleText.draw(dc);
+            _matchNumberText.draw(dc);
+            _matchTimeText.draw(dc);
+        }
     }
 
     private function setColors(dc, isBlue, highlight, textBox) {

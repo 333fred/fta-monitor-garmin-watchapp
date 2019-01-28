@@ -5,6 +5,7 @@ class StatusViewDelegate extends Ui.InputDelegate {
     private var _ui;
 
     private var _currentState;
+    private var _previousState;
 
     function initialize(ui) {
         _ui = ui;
@@ -28,21 +29,48 @@ class StatusViewDelegate extends Ui.InputDelegate {
         return false;
     }
 
-    function handleNumber() {
-        if (_currentState == ViewStatus.TEAM_NUMBER) {
-            _currentState = ViewStatus.TEAM_STATUS;
-        } else {
-            _currentState = ViewStatus.TEAM_NUMBER;
+    function onKeyPressed(keyEvent) {
+        System.println(Lang.format("Key is $1$", [keyEvent.getKey()]));
+        if (keyEvent.getKey() == Ui.KEY_ENTER && _currentState != ViewStatus.FIELD_STATUS) {
+            _previousState = _currentState;
+            _currentState = ViewStatus.FIELD_STATUS;
+            _ui.setViewStatus(_currentState);
+            return true;
         }
-        _ui.setViewStatus(_currentState);
+
+        return false;
+    }
+
+    function onKeyReleased(keyEvent) {
+        if (keyEvent.getKey() == Ui.KEY_ENTER && _currentState == ViewStatus.FIELD_STATUS) {
+            _currentState = _previousState;
+            _ui.setViewStatus(_currentState);
+            return true;
+        }
+
+        return false;
+    }
+
+    function handleNumber() {
+        handleState(ViewStatus.TEAM_NUMBER);
     }
 
     function handleBattery() {
-        if (_currentState == ViewStatus.BATTERY) {
-            _currentState = ViewStatus.TEAM_STATUS;
+        handleState(ViewStatus.BATTERY);
+    }
+
+    function handleState(targetState) {
+        var state = _currentState == ViewStatus.FIELD_STATUS ? _previousState : _currentState;
+        if (state == targetState) {
+            state = ViewStatus.TEAM_STATUS;
         } else {
-            _currentState = ViewStatus.BATTERY;
+            state = targetState;
         }
-        _ui.setViewStatus(_currentState);
+        if (_currentState == ViewStatus.FIELD_STATUS) {
+            _previousState = state;
+        } else {
+            _currentState = state;
+            _ui.setViewStatus(_currentState);
+        }
     }
 }
