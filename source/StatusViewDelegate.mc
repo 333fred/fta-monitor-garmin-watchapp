@@ -14,14 +14,12 @@ class StatusViewDelegate extends Ui.InputDelegate {
 
     function onSwipe(swipeEvent) {
         var direction = swipeEvent.getDirection();
-
         switch (direction) {
             case Ui.SWIPE_UP:
             case Ui.SWIPE_DOWN:
                 handleNumber();
                 return true;
             case Ui.SWIPE_LEFT:
-            case Ui.SWIPE_RIGHT:
                 handleBattery();
                 return true;
         }
@@ -30,7 +28,6 @@ class StatusViewDelegate extends Ui.InputDelegate {
     }
 
     function onKeyPressed(keyEvent) {
-        System.println(Lang.format("Key is $1$", [keyEvent.getKey()]));
         if (keyEvent.getKey() == Ui.KEY_ENTER && _currentState != ViewStatus.FIELD_STATUS) {
             _previousState = _currentState;
             _currentState = ViewStatus.FIELD_STATUS;

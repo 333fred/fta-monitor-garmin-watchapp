@@ -105,8 +105,11 @@ class StatusView extends Ui.View {
 
         _cell3YStart = _cell2YEnd + 2;
         _cell3YEnd = _cell3YStart + _cellHeight;
-        var cell3Text = _cell3YStart + cellTextOffset;
+        var screenSquare = System.DeviceSettings.screenShape == System.SCREEN_SHAPE_RECTANGLE;
+        var cell3Text = _cell3YStart + (screenSquare ? cellTextOffset : cellTextOffset - 5);
 
+        var blueJustification = (screenSquare ? Graphics.TEXT_JUSTIFY_CENTER : Graphics.TEXT_JUSTIFY_LEFT) | Graphics.TEXT_JUSTIFY_VCENTER;
+        var redJustification = (screenSquare ? Graphics.TEXT_JUSTIFY_CENTER : Graphics.TEXT_JUSTIFY_RIGHT) | Graphics.TEXT_JUSTIFY_VCENTER;
         var totallyCentered = Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER;
 
         // Split the X dimension into quarters, the numbers
@@ -121,11 +124,13 @@ class StatusView extends Ui.View {
         // 3/4 of the screen on the right
         var rightCentered = halfWidth + leftCentered;
 
+        var cellFont = screenSquare ? Graphics.FONT_MEDIUM : Graphics.FONT_TINY;
+
         _timeView = new Ui.Text({
             :color=>Graphics.COLOR_WHITE,
             :font=>Graphics.FONT_XTINY,
-            :justification=>Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER,
-            :locX=>margin,
+            :justification=>(screenSquare ? Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER : totallyCentered),
+            :locX=>(screenSquare ? margin : halfWidth),
             :locY=>firstRowY
         });
 
@@ -149,7 +154,7 @@ class StatusView extends Ui.View {
             :text=>"Blue",
             :color=>Graphics.COLOR_WHITE,
             :font=>Graphics.FONT_TINY,
-            :justification=>totallyCentered,
+            :justification=>blueJustification,
             :locX=>leftCentered,
             :locY=>thirdRowY
         });
@@ -158,49 +163,55 @@ class StatusView extends Ui.View {
             :text=>"Red",
             :color=>Graphics.COLOR_WHITE,
             :font=>Graphics.FONT_TINY,
-            :justification=>totallyCentered,
+            :justification=>redJustification,
             :locX=>rightCentered,
             :locY=>thirdRowY
         });
 
         _blue1Text = new Ui.Text({
             :color=>Graphics.COLOR_WHITE,
-            :justification=>totallyCentered,
+            :font=>cellFont,
+            :justification=>blueJustification,
             :locX=>leftCentered,
             :locY=>cell1Text
         });
 
         _blue2Text = new Ui.Text({
             :color=>Graphics.COLOR_WHITE,
-            :justification=>totallyCentered,
+            :font=>cellFont,
+            :justification=>blueJustification,
             :locX=>leftCentered,
             :locY=>cell2Text
         });
 
         _blue3Text = new Ui.Text({
             :color=>Graphics.COLOR_WHITE,
-            :justification=>totallyCentered,
+            :font=>cellFont,
+            :justification=>blueJustification,
             :locX=>leftCentered,
             :locY=>cell3Text
         });
 
         _red1Text = new Ui.Text({
             :color=>Graphics.COLOR_WHITE,
-            :justification=>totallyCentered,
+            :font=>cellFont,
+            :justification=>redJustification,
             :locX=>rightCentered,
             :locY=>cell3Text
         });
 
         _red2Text = new Ui.Text({
             :color=>Graphics.COLOR_WHITE,
-            :justification=>totallyCentered,
+            :font=>cellFont,
+            :justification=>redJustification,
             :locX=>rightCentered,
             :locY=>cell2Text
         });
 
         _red3Text = new Ui.Text({
             :color=>Graphics.COLOR_WHITE,
-            :justification=>totallyCentered,
+            :font=>cellFont,
+            :justification=>redJustification,
             :locX=>rightCentered,
             :locY=>cell1Text
         });
