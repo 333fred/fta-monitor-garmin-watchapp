@@ -29,9 +29,7 @@ class StatusViewDelegate extends Ui.InputDelegate {
 
     function onKeyPressed(keyEvent) {
         if (keyEvent.getKey() == Ui.KEY_ENTER && _currentState != ViewStatus.FIELD_STATUS) {
-            _previousState = _currentState;
-            _currentState = ViewStatus.FIELD_STATUS;
-            _ui.setViewStatus(_currentState);
+            activateFieldStatus();
             return true;
         }
 
@@ -40,12 +38,38 @@ class StatusViewDelegate extends Ui.InputDelegate {
 
     function onKeyReleased(keyEvent) {
         if (keyEvent.getKey() == Ui.KEY_ENTER && _currentState == ViewStatus.FIELD_STATUS) {
-            _currentState = _previousState;
-            _ui.setViewStatus(_currentState);
+            deactivateFieldStatus();
             return true;
         }
 
         return false;
+    }
+
+    function onHold(keyEvent) {
+        if (_currentState != ViewStatus.FIELD_STATUS) {
+            activateFieldStatus();
+            return true;
+        }
+        return false;
+    }
+
+    function onTap(keyEvent) {
+        if (_currentState == ViewStatus.FIELD_STATUS) {
+            deactivateFieldStatus();
+            return true;
+        }
+        return false;
+    }
+
+    private function activateFieldStatus() {
+        _previousState = _currentState;
+        _currentState = ViewStatus.FIELD_STATUS;
+        _ui.setViewStatus(_currentState);
+    }
+
+    private function deactivateFieldStatus() {
+        _currentState = _previousState;
+        _ui.setViewStatus(_currentState);
     }
 
     function handleNumber() {

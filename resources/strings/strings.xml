@@ -7,14 +7,14 @@
     <!-- Match Statuses -->
     <string id="not_ready">Not Ready</string>
     <string id="timeout">Timeout</string>
-    <string id="ready_prestart">Ready to Prestart</string>
-    <string id="prestart_initiated">Prestart Initiated</string>
-    <string id="prestart_completed">Prestart Completed</string>
+    <string id="ready_prestart">Rdy to Prstrt</string>
+    <string id="prestart_initiated">Prestrt Init</string>
+    <string id="prestart_completed">Prestrt Comp</string>
     <string id="match_ready">Match Ready</string>
-    <string id="sending_data">Sending Data</string>
-    <string id="auto_mode">Auto Running</string>
-    <string id="transition_mode">Match Transition</string>
-    <string id="teleop_mode">Teleop Running</string>
+    <string id="sending_data">Send Data</string>
+    <string id="auto_mode">Auto</string>
+    <string id="transition_mode">Transition</string>
+    <string id="teleop_mode">Teleop</string>
     <string id="over">Match Over</string>
     <string id="aborted">Match Aborted</string>
 
