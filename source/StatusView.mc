@@ -105,7 +105,7 @@ class StatusView extends Ui.View {
 
         _cell3YStart = _cell2YEnd + 2;
         _cell3YEnd = _cell3YStart + _cellHeight;
-        var screenSquare = System.DeviceSettings.screenShape == System.SCREEN_SHAPE_RECTANGLE;
+        var screenSquare = System.getDeviceSettings().screenShape == System.SCREEN_SHAPE_RECTANGLE;
         var cell3Text = _cell3YStart + (screenSquare ? cellTextOffset : cellTextOffset - 5);
 
         var blueJustification = (screenSquare ? Graphics.TEXT_JUSTIFY_CENTER : Graphics.TEXT_JUSTIFY_LEFT) | Graphics.TEXT_JUSTIFY_VCENTER;
@@ -349,11 +349,11 @@ class StatusView extends Ui.View {
             dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_BLACK);
             dc.fillRoundedRectangle(_redCellStart, _thirdRowBackgroundYStart, _cellWidth, _thirdRowHeight, _radius);
             setColors(dc, false, _red1Highlight, _red1Text);
-            dc.fillRoundedRectangle(_redCellStart, _cell1YStart, _cellWidth, _cellHeight, _radius);
+            dc.fillRoundedRectangle(_redCellStart, _cell3YStart, _cellWidth, _cellHeight, _radius);
             setColors(dc, false, _red2Highlight, _red2Text);
             dc.fillRoundedRectangle(_redCellStart, _cell2YStart, _cellWidth, _cellHeight, _radius);
             setColors(dc, false, _red3Highlight, _red3Text);
-            dc.fillRoundedRectangle(_redCellStart, _cell3YStart, _cellWidth, _cellHeight, _radius);
+            dc.fillRoundedRectangle(_redCellStart, _cell1YStart, _cellWidth, _cellHeight, _radius);
 
             updateTeams();
             _blue1Text.draw(dc);

@@ -92,6 +92,8 @@ module MatchState {
                 return Rez.Strings.over;
             case ABORTED:
                 return Rez.Strings.aborted;
+            default:
+                return "";
         }
     }
 }
@@ -132,6 +134,8 @@ module TeamStatus {
                 return Rez.Strings.bypassed;
             case BAT:
                 return Rez.Strings.battery;
+            default:
+                return "";
         }
     }
 
