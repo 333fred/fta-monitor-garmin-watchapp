@@ -1,3 +1,5 @@
+using Toybox.System;
+
 class TeamStatusManager {
     // All variables are of type TeamStatus
     public var Blue1Status;
@@ -109,7 +111,8 @@ module TeamStatus {
         GOOD = 6,
         BWU = 7,
         BYP = 8,
-        BAT = 9
+        BAT = 9,
+        BAT_CONNECTED = 10
     }
 
     function getStatusString(status) {
@@ -133,6 +136,7 @@ module TeamStatus {
             case BYP:
                 return Rez.Strings.bypassed;
             case BAT:
+            case BAT_CONNECTED:
                 return Rez.Strings.battery;
             default:
                 return "";
@@ -140,7 +144,7 @@ module TeamStatus {
     }
 
     function isBadStatus(status) {
-        return status != GOOD;
+        return status != GOOD && status != BAT_CONNECTED;
     }
 
     function formatBattery(battery) {
